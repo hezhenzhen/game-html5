@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>超级买家贺新年</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: #fff000">
+<!--放一下重要的图片，预加载-->
+<div class="pre_load">
+    <img src="images/begin_bg.jpg" alt="">
+    <img src="images/game_bg.jpg" alt="">
+    <img src="images/p2_plane.png" alt="">
+    <img src="images/pro_1.png" alt="">
+    <img src="images/pro_2.png" alt="">
+    <img src="images/pro_3.png" alt="">
+    <img src="images/pro_4.png" alt="">
+    <img src="images/pro_5.png" alt="">
+    <img src="images/pro_6.png" alt="">
+    <img src="images/pro_7.png" alt="">
+    <img src="images/pro_8.png" alt="">
+    <img src="images/pro_boom.png" alt="">
+    <img src="images/p2_hz.png" alt="">
+    <img src="images/tip_pop_bg.png" alt="">
+    <img src="images/fail_bg.png" alt="">
+    <img src="images/suc_bg.png" alt="">
+    <img src="images/tip_pop_bg.png" alt="">
+    <img src="images/tip_pop_bg.png" alt="">
+    <img src="images/p2_clock.png" alt="">
+    <img src="images/bonus.png" alt="">
+    <img src="images/super_tip.jpg" alt="">
+</div>
+<!--loading-->
+<div class="page" id="page0">
+    <div class="bg"></div>
+    <a href="http://baidu.com" class="hq_logo"></a>
+    <div class="load_txt" id="load_txt">0%</div>
+    <div class="load_img">
+        <div class="load_p1"></div>
+        <div class="load_p2" id="cur_load"></div>
+        <div class="star" id="load_star"></div>
+    </div>
+</div>
+<!--开始页面-->
+<div class="page" id="page1">
+    <div class="bg"></div>
+    <a href="http://baidu.com" class="hq_logo"></a>
+    <div class="p1_tip" id="p1_tip"></div>
+    <div class="p1_mid"></div>
+    <div class="p1_start" id="p1_start"></div>
+</div>
+<!--游戏页面-->
+<div class="page" id="page2">
+    <div class="bg"></div>
+    <div class="p2_plane" id="plane"></div>
+    <div class="p2_user">
+        <img src="http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46" alt="">
+    </div>
+    <div class="p2_point" id="point">0</div>
+    <div class="p2_time" id="Time">30:00</div>
+    <div class="p2_music music_on" id="p2_music">
+        <img src="images/p2_cd.png" alt="" class="p2_cd" id="p2_cd">
+        <img src="images/p2_on.png" alt="" class="p2_on">
+        <img src="images/p2_off.png" alt="" class="p2_off">
+    </div>
+    <div class="p2_clock" id="p2_clock"></div>
+    <!--挑战结果-->
+    <!--
+        成功的  -- p2_success
+        失败的  -- p2_fail
+    -->
+    <div class="p2_success" id="res_box">
+        <div class="head">
+            <img src="http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46" alt="">
+            <div class="head_mask"></div>
+        </div>
+        <div class="fail_con">
+            <p class="res_txt">您的成绩为：<span class="color_num"><strong id="curPoint">70</strong>分</span></p>
+            <p class="res_txt">成绩必须达到100分才能领取红包</p>
+            <p class="res_tip m-t-1">最佳成绩为：<span id="bestPoint">260分</span></p>
+            <p class="res_tip">最佳排名为：NO.<span id="bestLevel">2</span></p>
+        </div>
+
+        <a href="#" class="btn share_btn" id="share_btn">分享</a>
+        <a href="#" class="btn look_btn" id="look_btn">查看红包</a>
+        <a href="#" class="btn again_btn" id="again_btn">再玩一次</a>
+        <p class="look_box">
+            <a href="#" class="look_link" id="look_link">查看我的排行榜</a>
+        </p>
+        <!--
+        <p>
+            <img src="images/super_tip.jpg" alt="" class="super_tip_img">
+        </p>
+        <p class="login_box">
+            <a href="#" class="login_link">立即登录</a>|
+            <a href="#" class="login_link">我要认证</a>
+        </p>
+        <p class="again_box">
+            <a href="#" class="look_link" id="again_btn">再玩一次</a>
+        </p>
+        -->
+    </div>
+    <!--红包-->
+    <div class="p2_bonus" id="pop_bonus">
+        <div class="p2_num" id="bonus_res">
+            <p class="bonus_p">￥<strong id="bonus">4.18</strong></p>
+            <a href="#" class="get_btn" id="get_btn">点击领取</a>
+        </div>
+        <div class="bonus_mask" id="bonus_mask"></div>
+    </div>
+    <canvas id="gameCanvas" class="game_canvas"></canvas>
+</div>
+<div class="mask" id="mask"></div>
+<!--锦囊-->
+<div class="tip_pops" id="tip_pops">
+    <div class="pop_close" id="pop_close"></div>
+    <div class="pop-tits" id="tips_tits">
+        <div class="tab-t tit0 active" index="0"></div>
+        <div class="tab-t tit1" index="1"></div>
+        <div class="tab-t tit2" index="2"></div>
+    </div>
+    <div class="pop-con">
+        <div class="tab-c active" style="display: none">
+            <dl>
+                <dt class="tit_1">活动奖品</dt>
+                <dd>随机现金红包</dd>
+            </dl>
+            <dl>
+                <dt class="tit_1">活动时间</dt>
+                <dd>2016年12月28日 10:00-2017年01月11日24:00</dd>
+            </dl>
+            <dl>
+                <dt class="tit_1">主办单位</dt>
+                <dd>
+                    <p>本次活动主办单位为<a href="#">华强电子网</a></p>
+                    <p>本次活动的最终解释权归华强电子网所有</p>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="tit_2">活动及兑奖说明</dt>
+                <dd>
+                    <p>每次游戏积分达到100分即可获得抽奖机会1次，每个微信号限3次抽奖机会。</p>
+                    <p>活动中获取的红包，需在活动结束后15日内进行提现，逾期将清空</p>
+                </dd>
+            </dl>
+        </div>
+        <div class="tab-c" style="display: none">
+            <h3 class="tit-3">当前排名:第2名（只显示前20名）</h3>
+            <ul class="tab-ul">
+                <li class="rank_tit">
+                    <span class="rank_num">排名</span>
+                    <span class="rank_head">头像</span>
+                    <span class="rank_name">昵称</span>
+                    <span class="rank_point">成绩</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num"><i class="no1"></i></span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                        <img src="http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46" alt="">
+                    </span>
+                    <span class="rank_name">疯子范ル</span>
+                    <span class="rank_point">280分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num"><i class="no2"></i></span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                        <img src="http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46" alt="">
+                    </span>
+                    <span class="rank_name">戒烟戒酒不戒</span>
+                    <span class="rank_point">270分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num"><i class="no3"></i></span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                        <img src="http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46" alt="">
+                    </span>
+                    <span class="rank_name">露露同学</span>
+                    <span class="rank_point">264分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">4</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">虐心少年</span>
+                    <span class="rank_point">255分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">5</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">辉辉同学</span>
+                    <span class="rank_point">251分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">6</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">超超同学</span>
+                    <span class="rank_point">238分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">7</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">最凉卜过人心</span>
+                    <span class="rank_point">222分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">8</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">空有一丝愁</span>
+                    <span class="rank_point">212分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">9</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">疯子范ル</span>
+                    <span class="rank_point">199分</span>
+                </li>
+                <li class="rank">
+                    <span class="rank_num">10</span>
+                    <span class="rank_head">
+                        <em class="rank_head_m"></em>
+                    </span>
+                    <span class="rank_name">疯子范ル</span>
+                    <span class="rank_point">189分</span>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-c">
+            <p class="tip_info">可提现奖金</p>
+            <p class="my_bonus">￥<strong id="myBonus">16.18</strong></p>
+            <p>
+                <a href="#" class="cash_btn">立即提现</a>
+            </p>
+            <dl class="dl_3">
+                <dt>提现说明：</dt>
+                <dd>
+                    <p>1、默认提现金额为1.00元，不足1.00元不能提现；</p>
+                    <p>2、提现后在将以微信红包的方式发送</p>
+                </dd>
+            </dl>
+            <a href="##" class="super_btn">认证吵架买家</a>
+            <a href="##" class="publish_btn">发布求购</a>
+        </div>
+    </div>
+</div>
+<!--share-->
+<div class="share" id="share"></div>
+<audio autoplay="autoplay" loop='loop' id="audio"  src="music.mp3">
+    <source src="music.mp3" type="audio/mpeg" />
+</audio>
+<script src="js/script.js"></script>
+<script>
+//    var audio = document.getElementById('audio');
+//     document.addEventListener('touchstart', function(){
+//         audio.play();
+//     }, false);
+//    audio.pause();
+</script>
+</body>
+</html>
