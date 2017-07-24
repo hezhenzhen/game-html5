@@ -37,7 +37,7 @@ window.onload = function(){
     var clientW = document.documentElement.clientWidth;
     var clientH = document.documentElement.clientHeight;
     var cTop = parseInt(206 * arg);
-    alert(clientH - cTop);
+    // alert(clientH - cTop);
     var nHei = clientH - cTop;
     var canvasWidth = Math.floor(clientW * 750 / 750);
     var canvasHeight = Math.floor(clientW * nHei / 750);
